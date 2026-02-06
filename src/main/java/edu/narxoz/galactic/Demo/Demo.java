@@ -4,20 +4,17 @@ import edu.narxoz.galactic.bodies.*;
 import edu.narxoz.galactic.cargo.*;
 import edu.narxoz.galactic.drones.*;
 import edu.narxoz.galactic.dispatcher.*;
+import edu.narxoz.galactic.factory.DroneFactory;
 import edu.narxoz.galactic.task.*;
 
 public class Demo {
     public static void main(String[] args) {
         Planet earth = new Planet("Earth", 0, 0, "Oxygen");
         SpaceStation iss = new SpaceStation("ISS", 100, 0, 5);
-
         Cargo cargo = new Cargo(50, "Supplies");
-
         DeliveryTask task = new DeliveryTask(earth, iss, cargo);
-
-        LightDrone light = new LightDrone("LD-1", 10);
-        HeavyDrone heavy = new HeavyDrone("HD-1", 100);
-
+        LightDrone light = (LightDrone) DroneFactory.createLight("LD-1", 10);
+        HeavyDrone heavy = (HeavyDrone) DroneFactory.createHeavy("HD-1", 100);
         Dispatcher dispatcher = new Dispatcher();
 
         System.out.println("Assign LightDrone: " + dispatcher.assignTask(task, light));
